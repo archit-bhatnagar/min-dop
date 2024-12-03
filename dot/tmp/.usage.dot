@@ -1,0 +1,5 @@
+digraph "CFG for 'usage' function" {
+	label="CFG for 'usage' function";
+
+	Node0x5b89056ea7d0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{1:\l|  %2 = tail call i32 (ptr, ...) @printf(ptr @.str.30, ptr %0)\l  ret void\l}"];
+}

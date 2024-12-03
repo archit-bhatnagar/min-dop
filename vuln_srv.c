@@ -40,7 +40,7 @@ void __gcov_flush(void);
 
 g_var_t g_clfd;
 
-g_var_t g_is_root = 0;
+// g_var_t g_is_root = 0;
 g_var_t g_d = 0;
 g_var_t g_c = 0;
 g_var_t *g_p_c = &g_c;
@@ -48,9 +48,10 @@ g_var_t g_b= 0;
 g_var_t *g_p_b = &g_b;
 g_var_t g_a = 0;
 
-g_struct_t g_srv = {&g_a, &g_p_b, &g_c, 0, 0};
+// g_struct_t g_srv = {&g_a, &g_p_b, &g_c, 0, 0};
 
 g_var_t SECRET = 0x1337;
+
 
 g_var_t TYPE_NONE      = 3;
 g_var_t TYPE_ADD       = 4;
@@ -68,14 +69,14 @@ g_var_t LUT_ERROR_CODES[] = {
   0xffffff02
 };
 
-g_var_p_t g_p_secret = &SECRET;
-g_var_pp_t g_pp_secret = &g_p_secret;
+// g_var_p_t g_p_secret = &SECRET;
+// g_var_pp_t g_pp_secret = &g_p_secret;
 
-g_var_p_t g_p_g_a = &g_a;
-g_var_pp_t g_pp_g_a = &g_p_g_a;
+// g_var_p_t g_p_g_a = &g_a;
+// g_var_pp_t g_pp_g_a = &g_p_g_a;
 
-g_var_p_t g_p_g_is_root = &g_is_root;
-g_var_pp_t g_pp_g_is_root = &g_p_g_is_root;
+// g_var_p_t g_p_g_is_root = &g_is_root;
+// g_var_pp_t g_pp_g_is_root = &g_p_g_is_root;
 
 g_var_t g_scratch_buf[SCRATCH_BUF_LEN] = {0};
 g_var_p_t g_p_scratch_buf = &g_scratch_buf[0];
@@ -93,7 +94,7 @@ volatile var_t padding1 = 0; // NOTE: These are for alignment purposes.
 volatile var_t padding2 = 0; // Different compilers add different padding.
 volatile var_t padding3 = 0;
 var_t connect_limit = MAXCONN;
-g_struct_p_t p_srv = &g_srv;
+// g_struct_p_t p_srv = &g_srv;
 g_var_p_t p_g_d = &g_d;
 // "STACK" VARIABLES STOP
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +148,8 @@ int checkForInvalidTypes(var_t type, int clientfd)
 void getG_A(int clientfd)
 {
   char buffer[20] = {0};
+  g_var_p_t g_p_g_a = &g_a;
+  g_var_pp_t g_pp_g_a = &g_p_g_a;
 
   // Memory Disclosure
   printf("[get] g_a:%x\n", *g_p_g_a);
@@ -157,7 +160,7 @@ void getG_A(int clientfd)
 //
 // Return privilege level as reply
 //
-void getPrivLevel(int clientfd)
+void getPrivLevel(int clientfd,  g_var_t g_is_root)
 {
   char buffer[20] = {0};
 
@@ -174,9 +177,14 @@ void getPrivLevel(int clientfd)
 //
 // Set privilege level to root if "s" matches magic password
 //
-void setPrivLevel(int s, int clientfd)
+void setPrivLevel(int s, int clientfd, g_var_t g_is_root)
 {
-  char buffer[20] = {0};
+  char buffer[30] = {0};
+  int a = 2;
+  int b = 3;
+  g_var_p_t g_p_secret = &SECRET;
+  g_var_pp_t g_pp_secret = &g_p_secret;
+  printf("%d, %d\n", a, b);
 
   printf("SECRET?:%d\n", s);
   if (s == SECRET) {
@@ -214,6 +222,12 @@ void do_serve(int sockfd)
 {
   var_p_t p_size = 0;
   var_p_t p_type = 0;
+  g_struct_t g_srv = {&g_a, &g_p_b, &g_c, 0, 0};
+  g_struct_p_t p_srv = &g_srv;
+  g_var_t g_is_root = 0;
+  g_var_p_t g_p_g_is_root = &g_is_root;
+  g_var_pp_t g_pp_g_is_root = &g_p_g_is_root;
+  printf("try");
 
   // gadget dispatcher
   while ((g_clfd = doListen(sockfd, &connect_limit))) {
@@ -263,10 +277,10 @@ void do_serve(int sockfd)
       p_srv->v_1 += *p_size;                                    // DOP: addition
     } else if (*p_type == TYPE_GETPRIV) {
       printf("[do_serve] TYPE_GETPRIV\n");
-      getPrivLevel(g_clfd);
+      getPrivLevel(g_clfd, g_is_root);
     } else if (*p_type == TYPE_SETPRIV) {
       printf("[do_serve] TYPE_SETPRIV\n");
-      setPrivLevel(*p_size, g_clfd);
+      setPrivLevel(*p_size, g_clfd, g_is_root);
     } else if (*p_type == TYPE_GET) {
       printf("[do_serve] TYPE_GET\n");
       getG_A(g_clfd);
@@ -340,6 +354,7 @@ int main(int argc, char **argv)
   // GCOVR_EXCL_STOP
 
   printf("[main] listening on port %d...\n", atoi(argv[1]));
+  // printf("")
 
   // Serve for love
   do_serve(sockfd);

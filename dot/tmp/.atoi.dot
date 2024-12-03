@@ -1,0 +1,5 @@
+digraph "CFG for 'atoi' function" {
+	label="CFG for 'atoi' function";
+
+	Node0x5b89056f8be0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{1:\l|  %2 = tail call i32 @strtol(ptr nocapture nonnull %0, ptr null, i32 10) #7\l  ret i32 %2\l}"];
+}

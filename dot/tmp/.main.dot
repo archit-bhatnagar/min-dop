@@ -1,0 +1,28 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5b89056df5b0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{2:\l|  %3 = alloca %struct.sockaddr_in, align 4\l  %4 = alloca i32, align 4\l  %5 = bitcast ptr %3 to ptr\l  call void @llvm.lifetime.start.p0(i64 16, ptr nonnull %5) #7\l  %6 = icmp slt i32 %0, 2\l  br i1 %6, label %7, label %9\l|{<s0>T|<s1>F}}"];
+	Node0x5b89056df5b0:s0 -> Node0x5b89056df600[tooltip="2 -> 7\nProbability 50.00%" ];
+	Node0x5b89056df5b0:s1 -> Node0x5b89056df650[tooltip="2 -> 9\nProbability 50.00%" ];
+	Node0x5b89056df600 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{7:\l|  %8 = load ptr, ptr %1, align 4, !tbaa !3\l  tail call void @usage(ptr %8)\l  br label %49\l}"];
+	Node0x5b89056df600 -> Node0x5b89056df920[tooltip="7 -> 49\nProbability 100.00%" ];
+	Node0x5b89056df650 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{9:\l|  %10 = tail call i32 @socket(i32 2, i32 1, i32 0) #7\l  %11 = icmp slt i32 %10, 0\l  br i1 %11, label %12, label %15\l|{<s0>T|<s1>F}}"];
+	Node0x5b89056df650:s0 -> Node0x5b89056df6a0[tooltip="9 -> 12\nProbability 0.00%" ];
+	Node0x5b89056df650:s1 -> Node0x5b89056df6f0[tooltip="9 -> 15\nProbability 100.00%" ];
+	Node0x5b89056df6a0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f3c7b170" fontname="Courier",label="{12:\l|  tail call void @perror(ptr @.str.31) #12\l  %13 = tail call ptr @__errno_location() #13\l  %14 = load i32, ptr %13, align 4, !tbaa !7\l  tail call void @exit(i32 %14) #14\l  unreachable\l}"];
+	Node0x5b89056df6f0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{15:\l|  %16 = getelementptr inbounds %struct.sockaddr_in, ptr %3, i32 0, i32 3,\l... i32 0\l  %17 = bitcast ptr %16 to ptr\l  store i64 0, ptr %17, align 4\l  %18 = getelementptr inbounds %struct.sockaddr_in, ptr %3, i32 0, i32 0\l  store i16 2, ptr %18, align 4, !tbaa !9\l  %19 = getelementptr inbounds ptr, ptr %1, i32 1\l  %20 = load ptr, ptr %19, align 4, !tbaa !3\l  %21 = tail call i32 @atoi(ptr %20) #15\l  %22 = trunc i32 %21 to i16\l  %23 = tail call fastcc zeroext i16 @__bswap_16(i16 zeroext %22)\l  %24 = getelementptr inbounds %struct.sockaddr_in, ptr %3, i32 0, i32 1\l  store i16 %23, ptr %24, align 2, !tbaa !13\l  %25 = getelementptr inbounds %struct.sockaddr_in, ptr %3, i32 0, i32 2, i32 0\l  store i32 0, ptr %25, align 4, !tbaa !14\l  %26 = bitcast ptr %4 to ptr\l  call void @llvm.lifetime.start.p0(i64 4, ptr nonnull %26) #7\l  store i32 1, ptr %4, align 4, !tbaa !7\l  %27 = call i32 @setsockopt(i32 %10, i32 1, i32 2, ptr nonnull %26, i32 4) #7\l  %28 = icmp eq i32 %27, -1\l  br i1 %28, label %29, label %32\l|{<s0>T|<s1>F}}"];
+	Node0x5b89056df6f0:s0 -> Node0x5b89056df740[tooltip="15 -> 29\nProbability 0.00%" ];
+	Node0x5b89056df6f0:s1 -> Node0x5b89056df790[tooltip="15 -> 32\nProbability 100.00%" ];
+	Node0x5b89056df740 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2cab570" fontname="Courier",label="{29:\l|  call void @perror(ptr @.str.32) #12\l  %30 = tail call ptr @__errno_location() #13\l  %31 = load i32, ptr %30, align 4, !tbaa !7\l  call void @exit(i32 %31) #14\l  unreachable\l}"];
+	Node0x5b89056df790 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{32:\l|  %33 = bitcast ptr %3 to ptr\l  %34 = call i32 @bind(i32 %10, ptr nonnull %33, i32 16) #7\l  %35 = icmp eq i32 %34, 0\l  br i1 %35, label %39, label %36\l|{<s0>T|<s1>F}}"];
+	Node0x5b89056df790:s0 -> Node0x5b89056df830[tooltip="32 -> 39\nProbability 100.00%" ];
+	Node0x5b89056df790:s1 -> Node0x5b89056df7e0[tooltip="32 -> 36\nProbability 0.00%" ];
+	Node0x5b89056df7e0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2cab570" fontname="Courier",label="{36:\l|  call void @perror(ptr @.str.33) #12\l  %37 = tail call ptr @__errno_location() #13\l  %38 = load i32, ptr %37, align 4, !tbaa !7\l  call void @exit(i32 %38) #14\l  unreachable\l}"];
+	Node0x5b89056df830 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{39:\l|  %40 = call i32 @listen(i32 %10, i32 1) #7\l  %41 = icmp eq i32 %40, 0\l  br i1 %41, label %45, label %42\l|{<s0>T|<s1>F}}"];
+	Node0x5b89056df830:s0 -> Node0x5b89056df8d0[tooltip="39 -> 45\nProbability 100.00%" ];
+	Node0x5b89056df830:s1 -> Node0x5b89056df880[tooltip="39 -> 42\nProbability 0.00%" ];
+	Node0x5b89056df880 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#f2cab570" fontname="Courier",label="{42:\l|  call void @perror(ptr @.str.34) #12\l  %43 = tail call ptr @__errno_location() #13\l  %44 = load i32, ptr %43, align 4, !tbaa !7\l  call void @exit(i32 %44) #14\l  unreachable\l}"];
+	Node0x5b89056df8d0 [shape=record,color="#3d50c3ff", style=filled, fillcolor="#be242e70" fontname="Courier",label="{45:\l|  %46 = load ptr, ptr %19, align 4, !tbaa !3\l  %47 = call i32 @atoi(ptr %46) #15\l  %48 = call i32 (ptr, ...) @printf(ptr @.str.35, i32 %47)\l  call void @do_serve(i32 %10)\l  call void @llvm.lifetime.end.p0(i64 4, ptr nonnull %26) #7\l  br label %49\l}"];
+	Node0x5b89056df8d0 -> Node0x5b89056df920[tooltip="45 -> 49\nProbability 100.00%" ];
+	Node0x5b89056df920 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{49:\l|  %50 = phi i32 [ -1, %7 ], [ 0, %45 ]\l  call void @llvm.lifetime.end.p0(i64 16, ptr nonnull %5) #7\l  ret i32 %50\l}"];
+}

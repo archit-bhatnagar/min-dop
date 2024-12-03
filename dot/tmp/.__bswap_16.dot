@@ -1,0 +1,5 @@
+digraph "CFG for '__bswap_16' function" {
+	label="CFG for '__bswap_16' function";
+
+	Node0x5b89056f8980 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{1:\l|  %2 = tail call i16 @llvm.bswap.i16(i16 %0)\l  ret i16 %2\l}"];
+}
