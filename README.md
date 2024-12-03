@@ -198,3 +198,4 @@ This option performs an increment on a single memory address as follows:
 ## Contributions
 
 This started mainly an educational exercise for myself. Any contributions are welcome to improve the documentation, code, or add additional features. Please open up an `issue` or `pull-request`. 
+# min-dop
